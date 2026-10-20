@@ -23,7 +23,7 @@ enum AppSelection: Hashable {
 
 struct ContentView: View {
     @EnvironmentObject var appState: AppState
-    @State private var configURL: String = "https://raw.githubusercontent.com/qist/tvbox/refs/heads/master/dianshi.json"
+    @State private var configURL: String = "https://linitfor.serv00.net/api.php/provide/vod"
     @State private var showConfigSheet = false
     @State private var selection: AppSelection?
 
@@ -198,8 +198,7 @@ struct SiteDetailView: View {
                 ScrollView {
                     LazyVGrid(columns: [GridItem(.adaptive(minimum: 140))], spacing: 12) {
                         ForEach(vods) { vod in
-                            VodCard(vod: vod)
-                                .onTapGesture { selectedVod = vod }
+                            VodCard(vod: vod) { selectedVod = vod }
                         }
                     }
                     .padding()
@@ -310,6 +309,7 @@ struct VodDetailSheet: View {
     @State private var detail: Vod?
     @State private var isLoading = false
     @State private var episodes: [Episode] = []
+    @State private var error: String?
     @State private var playUrl: String?
     @State private var playerURL: URL?
     @State private var playHeaders: [String: String] = [:]
@@ -326,6 +326,7 @@ struct VodDetailSheet: View {
                     if let remarks = vod.vodRemarks { Text(remarks.traditionalized()).foregroundStyle(.secondary) }
                     if let content = vod.vodContent { Text(content.traditionalized()).font(.body) }
                     if isLoading { ProgressView() }
+                    if let err = error { Text(err).foregroundStyle(.red).font(.caption) }
                     if !episodes.isEmpty {
                         Text("集數").font(.headline)
                         LazyVGrid(columns: [GridItem(.adaptive(minimum: 80))], spacing: 8) {
@@ -358,11 +359,18 @@ struct VodDetailSheet: View {
             if let d = vs.first {
                 detail = d
                 episodes = parseEpisodes(d)
+                if episodes.isEmpty {
+                    self.error = "無法解析集數（play_url 為空）"
+                }
             } else {
                 episodes = parseEpisodes(vod)
+                if episodes.isEmpty {
+                    self.error = "詳情為空，使用原始資料仍無集數"
+                }
             }
         } catch {
             episodes = parseEpisodes(vod)
+            self.error = "載入詳情失敗：\(error.localizedDescription)"
         }
     }
 
