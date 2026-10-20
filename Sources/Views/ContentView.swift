@@ -1,15 +1,34 @@
 import SwiftUI
 
+enum AppSelection: Hashable {
+    static func == (lhs: AppSelection, rhs: AppSelection) -> Bool {
+        switch (lhs, rhs) {
+        case (.site(let a), .site(let b)): return a == b
+        case (.live(let a), .live(let b)): return a == b
+        default: return false
+        }
+    }
+    func hash(into hasher: inout Hasher) {
+        switch self {
+        case .site(let s): hasher.combine(0); hasher.combine(s)
+        case .live(let l): hasher.combine(1); hasher.combine(l)
+        }
+    }
+    case site(Site)
+    case live(LiveConfig)
+}
+
 struct ContentView: View {
     @EnvironmentObject var appState: AppState
     @State private var configURL: String = "https://raw.githubusercontent.com/qist/tvbox/refs/heads/master/dianshi.json"
     @State private var showConfigSheet = false
+    @State private var selection: AppSelection?
 
     var body: some View {
         NavigationSplitView {
-            SidebarView()
+            SidebarView(selection: $selection)
         } detail: {
-            DetailView()
+            DetailView(selection: selection)
         }
         .toolbar {
             ToolbarItem(placement: .primaryAction) {
@@ -35,13 +54,23 @@ struct ContentView: View {
 
 struct SidebarView: View {
     @EnvironmentObject var appState: AppState
+    @Binding var selection: AppSelection?
 
     var body: some View {
-        List(selection: $appState.selectedSite) {
+        List(selection: $selection) {
             Section("站點") {
                 ForEach(appState.config?.sites ?? []) { site in
-                    NavigationLink(value: site) {
+                    NavigationLink(value: AppSelection.site(site)) {
                         Label(site.name.traditionalized(), systemImage: "globe")
+                    }
+                }
+            }
+            if let lives = appState.config?.lives, !lives.isEmpty {
+                Section("直播") {
+                    ForEach(lives) { live in
+                        NavigationLink(value: AppSelection.live(live)) {
+                            Label((live.name ?? "直播").traditionalized(), systemImage: "tv")
+                        }
                     }
                 }
             }
@@ -53,14 +82,20 @@ struct SidebarView: View {
 
 struct DetailView: View {
     @EnvironmentObject var appState: AppState
+    let selection: AppSelection?
 
     var body: some View {
-        if let site = appState.selectedSite {
+        switch selection {
+        case .site(let site):
             SiteDetailView(site: site)
-        } else if let config = appState.config {
-            ConfigOverview(config: config)
-        } else {
-            ContentUnavailableView("尚未載入配置", systemImage: "doc", description: Text((appState.errorMessage ?? "點擊工具列「載入配置」輸入配置 URL").traditionalized()))
+        case .live(let live):
+            LiveView(liveConfig: live)
+        case nil:
+            if let config = appState.config {
+                ConfigOverview(config: config)
+            } else {
+                ContentUnavailableView("尚未載入配置", systemImage: "doc", description: Text((appState.errorMessage ?? "點擊工具列「載入配置」輸入配置 URL").traditionalized()))
+            }
         }
     }
 }

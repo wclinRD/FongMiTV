@@ -176,7 +176,7 @@ struct ParseRule: Codable, Identifiable {
     var ext: [String]?
 }
 
-struct LiveConfig: Codable, Identifiable {
+struct LiveConfig: Codable, Identifiable, Hashable {
     var id: String { name ?? UUID().uuidString }
     var name: String?
     var url: String?

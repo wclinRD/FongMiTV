@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		10F742D387CDE3E692C6B17B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 683923F8500FBEDC8C4E0CE5 /* ContentView.swift */; };
 		16C4F1D8A4ABACA1A214E5E8 /* FongMiTVApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5CA71A768C47526838FFBFA /* FongMiTVApp.swift */; };
+		25CAB37F7B87A326AB0ED122 /* LiveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B67BD60635116FC7DF99903 /* LiveView.swift */; };
+		2670B278CA91E71559342EC1 /* LiveService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C25D34DD295CF02EF83D9FF2 /* LiveService.swift */; };
 		3B3B0862815D66EA454E0DAE /* ConfigService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204D362397932DD984A288F4 /* ConfigService.swift */; };
 		52C95E863608B1CBDDD8574B /* Hummingbird in Frameworks */ = {isa = PBXBuildFile; productRef = EEC787FC1DA1277B0EE8E14E /* Hummingbird */; };
 		5E956A91A60F689DE69E5215 /* SpiderSourceLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFB706EB7978A646B8D78BC7 /* SpiderSourceLoader.swift */; };
@@ -18,6 +20,7 @@
 		E9AEA0C243902072F3E5A530 /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC00A0518667C26A26C36831 /* PlayerView.swift */; };
 		F24646C053A7DC3A0A4B20D8 /* PlaybackState.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECEAF68B3DE7C651868780BF /* PlaybackState.swift */; };
 		F58C0CE4F026CE187D455DF0 /* Spider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C979840BD755E12210CAC6E /* Spider.swift */; };
+		F679B9A2D469BE5E73FF8F0A /* PythonSpider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4D55D36CDA2E61C6F3BD27A /* PythonSpider.swift */; };
 		F7B4834A9F3C2D183ED248E1 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC285FB53C5361791EE180FF /* Config.swift */; };
 		FF79C164F05AACD700918742 /* HTTPServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38B1391860B795CBA0445F51 /* HTTPServer.swift */; };
 /* End PBXBuildFile section */
@@ -28,9 +31,12 @@
 		204D362397932DD984A288F4 /* ConfigService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigService.swift; sourceTree = "<group>"; };
 		38B1391860B795CBA0445F51 /* HTTPServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPServer.swift; sourceTree = "<group>"; };
 		683923F8500FBEDC8C4E0CE5 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		8B67BD60635116FC7DF99903 /* LiveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveView.swift; sourceTree = "<group>"; };
 		9C979840BD755E12210CAC6E /* Spider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spider.swift; sourceTree = "<group>"; };
 		BC00A0518667C26A26C36831 /* PlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
+		C25D34DD295CF02EF83D9FF2 /* LiveService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveService.swift; sourceTree = "<group>"; };
 		C5CA71A768C47526838FFBFA /* FongMiTVApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FongMiTVApp.swift; sourceTree = "<group>"; };
+		D4D55D36CDA2E61C6F3BD27A /* PythonSpider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PythonSpider.swift; sourceTree = "<group>"; };
 		DD6A8CEB49ED16F2F4CBCE1E /* FongMiTV.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FongMiTV.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DFB706EB7978A646B8D78BC7 /* SpiderSourceLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpiderSourceLoader.swift; sourceTree = "<group>"; };
 		EBDFFD6CDA3CE0A8CCE19775 /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
@@ -71,6 +77,7 @@
 			isa = PBXGroup;
 			children = (
 				683923F8500FBEDC8C4E0CE5 /* ContentView.swift */,
+				8B67BD60635116FC7DF99903 /* LiveView.swift */,
 				BC00A0518667C26A26C36831 /* PlayerView.swift */,
 			);
 			path = Views;
@@ -81,6 +88,7 @@
 			children = (
 				EBDFFD6CDA3CE0A8CCE19775 /* AppSettings.swift */,
 				204D362397932DD984A288F4 /* ConfigService.swift */,
+				C25D34DD295CF02EF83D9FF2 /* LiveService.swift */,
 				0503C4EAB8EA122A561D04A4 /* MacCMSClient.swift */,
 				13640BC0A09814E2AB7300F3 /* SiteService.swift */,
 				DFB706EB7978A646B8D78BC7 /* SpiderSourceLoader.swift */,
@@ -99,6 +107,7 @@
 		A3B5F56995A1DE0983861F56 /* Spider */ = {
 			isa = PBXGroup;
 			children = (
+				D4D55D36CDA2E61C6F3BD27A /* PythonSpider.swift */,
 				9C979840BD755E12210CAC6E /* Spider.swift */,
 			);
 			path = Spider;
@@ -199,9 +208,12 @@
 				10F742D387CDE3E692C6B17B /* ContentView.swift in Sources */,
 				16C4F1D8A4ABACA1A214E5E8 /* FongMiTVApp.swift in Sources */,
 				FF79C164F05AACD700918742 /* HTTPServer.swift in Sources */,
+				2670B278CA91E71559342EC1 /* LiveService.swift in Sources */,
+				25CAB37F7B87A326AB0ED122 /* LiveView.swift in Sources */,
 				C61133BCB0090DFDD27C019A /* MacCMSClient.swift in Sources */,
 				F24646C053A7DC3A0A4B20D8 /* PlaybackState.swift in Sources */,
 				E9AEA0C243902072F3E5A530 /* PlayerView.swift in Sources */,
+				F679B9A2D469BE5E73FF8F0A /* PythonSpider.swift in Sources */,
 				E653C1727E75C76A838FCA0A /* SiteService.swift in Sources */,
 				F58C0CE4F026CE187D455DF0 /* Spider.swift in Sources */,
 				5E956A91A60F689DE69E5215 /* SpiderSourceLoader.swift in Sources */,

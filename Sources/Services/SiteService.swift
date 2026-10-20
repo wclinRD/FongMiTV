@@ -10,7 +10,15 @@ final class SiteService: ObservableObject {
 
     func spider(for site: Site, jsSource: String? = nil) -> Spider? {
         if let s = spiders[site.key] { return s }
-        if let src = jsSource, let spider = try? JSSpider(source: src) {
+        guard let src = jsSource, !src.isEmpty else { return nil }
+        // Python spider detection
+        if src.contains("def home") || src.contains("def category") || src.hasPrefix("# python") {
+            if let spider = try? PythonSpider(source: src) {
+                spiders[site.key] = spider
+                return spider
+            }
+        }
+        if let spider = try? JSSpider(source: src) {
             spiders[site.key] = spider
             return spider
         }
