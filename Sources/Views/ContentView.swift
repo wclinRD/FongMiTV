@@ -157,6 +157,9 @@ struct SiteDetailView: View {
     @State private var error: String?
     @State private var searchText = ""
     @State private var selectedVod: Vod?
+    @State private var currentPage: Int = 1
+    @State private var totalCount: Int = 0
+    @State private var isLoadingMore: Bool = false
 
     var body: some View {
         VStack(spacing: 0) {
@@ -199,6 +202,20 @@ struct SiteDetailView: View {
                     }
                     .padding()
                 }
+                if (totalCount == 0 || vods.count < totalCount) && !vods.isEmpty {
+                    HStack {
+                        Spacer()
+                        Button {
+                            Task { await loadMore() }
+                        } label: {
+                            if isLoadingMore { ProgressView().scaleEffect(0.7) } else { Text("載入更多") }
+                        }
+                        .buttonStyle(.bordered)
+                        .disabled(isLoadingMore)
+                        Spacer()
+                    }
+                    .padding(.bottom)
+                }
             }
         }
         .navigationTitle(site.name.traditionalized())
@@ -217,6 +234,7 @@ struct SiteDetailView: View {
             let hr = try await appState.siteService.home(site: site, jsSource: jsSource)
             homeResult = hr
             vods = hr.list
+            totalCount = hr.list.count
             if let first = hr.classes.first {
                 selectedClass = first
             }
@@ -230,8 +248,10 @@ struct SiteDetailView: View {
         error = nil
         defer { isLoading = false }
         do {
-            let (list, _) = try await appState.siteService.category(site: site, jsSource: jsSource, type: type, page: 1)
+            currentPage = 1
+            let (list, total) = try await appState.siteService.category(site: site, jsSource: jsSource, type: type, page: 1)
             vods = list
+            totalCount = total
         } catch {
             self.error = error.localizedDescription
         }
@@ -243,7 +263,29 @@ struct SiteDetailView: View {
         error = nil
         defer { isLoading = false }
         do {
+            currentPage = 1
             vods = try await appState.siteService.search(site: site, jsSource: jsSource, keyword: searchText)
+        } catch {
+            self.error = error.localizedDescription
+        }
+    }
+
+    private func loadMore() async {
+        guard !isLoadingMore else { return }
+        isLoadingMore = true
+        defer { isLoadingMore = false }
+        do {
+            if let sc = selectedClass {
+                let (list, total) = try await appState.siteService.category(site: site, jsSource: jsSource, type: sc.id, page: currentPage + 1)
+                vods.append(contentsOf: list)
+                currentPage += 1
+                totalCount = total
+            } else {
+                let (list, total) = try await appState.siteService.category(site: site, jsSource: jsSource, type: "0", page: currentPage + 1)
+                vods.append(contentsOf: list)
+                currentPage += 1
+                totalCount = total
+            }
         } catch {
             self.error = error.localizedDescription
         }
@@ -261,6 +303,7 @@ struct VodDetailSheet: View {
     @State private var episodes: [Episode] = []
     @State private var playUrl: String?
     @State private var playerURL: URL?
+    @State private var playHeaders: [String: String] = [:]
 
     var body: some View {
         NavigationStack {
@@ -286,7 +329,7 @@ struct VodDetailSheet: View {
                         }
                     }
                     if let playerURL {
-                        PlayerView(url: playerURL, title: vod.vodName)
+                        PlayerView(url: playerURL, title: vod.vodName, headers: playHeaders)
                             .frame(height: 360)
                     }
                 }
@@ -334,9 +377,11 @@ struct VodDetailSheet: View {
     private func play(_ ep: Episode) async {
         do {
             let flag = vod.vodPlayFrom ?? ""
-            let (url, _, _) = try await appState.siteService.play(site: site, jsSource: jsSource, flag: flag, url: ep.url)
+            let (url, headers, _) = try await appState.siteService.play(site: site, jsSource: jsSource, flag: flag, url: ep.url)
+            playHeaders = headers
             if let u = URL(string: url) { playerURL = u }
         } catch {
+            playHeaders = [:]
             if let u = URL(string: ep.url) { playerURL = u }
         }
     }

@@ -1,10 +1,12 @@
 import SwiftUI
 import AVKit
+import AVFoundation
 import Combine
 
 struct PlayerView: View {
     let url: URL
     let title: String?
+    var headers: [String: String] = [:]
     @State private var player: AVPlayer?
     @State private var timeObserver: Any?
     @State private var speed: Double = 1.0
@@ -54,7 +56,9 @@ struct PlayerView: View {
             .padding(.vertical, 6)
         }
         .onAppear {
-            let p = AVPlayer(url: url)
+            let asset = AVURLAsset(url: url, options: ["AVURLAssetHTTPHeaderFieldsKey": headers])
+            let item = AVPlayerItem(asset: asset)
+            let p = AVPlayer(playerItem: item)
             self.player = p
             PlaybackState.shared.update(url: url.absoluteString, title: title, isPlaying: true, speed: 1.0)
             p.play()
