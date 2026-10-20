@@ -23,7 +23,7 @@ enum AppSelection: Hashable {
 
 struct ContentView: View {
     @EnvironmentObject var appState: AppState
-    @State private var configURL: String = "https://linitfor.serv00.net/api.php/provide/vod"
+    @State private var configURL: String = "https://raw.githubusercontent.com/qist/tvbox/refs/heads/master/dianshi.json"
     @State private var showConfigSheet = false
     @State private var selection: AppSelection?
 
