@@ -104,19 +104,21 @@ struct DetailView: View {
     let selection: AppSelection?
 
     var body: some View {
-        switch selection {
-        case .site(let site):
-            SiteDetailView(site: site)
-        case .live(let live):
-            LiveView(liveConfig: live)
-        case .dlna:
-            DLNAView()
-        case nil:
-            if let config = appState.config {
-                ConfigOverview(config: config)
-            } else {
-                ContentUnavailableView("尚未載入配置", systemImage: "doc", description: Text((appState.errorMessage ?? "點擊工具列「載入配置」輸入配置 URL").traditionalized()))
+        if let selection {
+            switch selection {
+            case .site(let site):
+                SiteDetailView(site: site)
+            case .live(let live):
+                LiveView(liveConfig: live)
+            case .dlna:
+                DLNAView()
             }
+        } else if let site = appState.selectedSite {
+            SiteDetailView(site: site)
+        } else if let config = appState.config {
+            ConfigOverview(config: config)
+        } else {
+            ContentUnavailableView("尚未載入配置", systemImage: "doc", description: Text((appState.errorMessage ?? "點擊工具列「載入配置」輸入配置 URL").traditionalized()))
         }
     }
 }
