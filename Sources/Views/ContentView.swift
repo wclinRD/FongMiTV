@@ -209,8 +209,10 @@ struct SiteDetailView: View {
                         Spacer()
                     }
                     .padding(.bottom)
-                    .onAppear {
-                        Task { await loadMore() }
+                    .task(id: vods.count) {
+                        if !isLoadingMore && (totalCount == 0 || vods.count < totalCount) && !vods.isEmpty {
+                            await loadMore()
+                        }
                     }
                 }
             }
