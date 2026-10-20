@@ -1,0 +1,40 @@
+name: FongMiTV
+options:
+  bundleIdPrefix: com.fongmi
+  deploymentTarget:
+    macOS: "14.0"
+  xcodeVersion: "16.0"
+  createIntermediateGroups: true
+packages:
+  Hummingbird:
+    url: https://github.com/hummingbird-project/hummingbird
+    from: "2.0.0"
+targets:
+  FongMiTV:
+    type: application
+    platform: macOS
+    dependencies:
+      - package: Hummingbird
+    sources:
+      - path: Sources
+    resources:
+      - path: Resources
+    info:
+      path: Resources/Info.plist
+      properties:
+        CFBundleName: FongMiTV
+        CFBundleDisplayName: FongMiTV
+        CFBundleIdentifier: $(PRODUCT_BUNDLE_IDENTIFIER)
+        CFBundleVersion: "1"
+        CFBundleShortVersionString: "0.1.0"
+        LSMinimumSystemVersion: "14.0"
+        NSHighResolutionCapable: true
+        NSSupportsAutomaticGraphicsSwitching: true
+        NSAppTransportSecurity:
+          NSAllowsArbitraryLoads: true
+    settings:
+      base:
+        SWIFT_VERSION: "6.0"
+        MACOSX_DEPLOYMENT_TARGET: "14.0"
+        PRODUCT_NAME: FongMiTV
+        GENERATE_INFOPLIST_FILE: NO

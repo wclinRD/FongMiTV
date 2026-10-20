@@ -1,0 +1,414 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		10F742D387CDE3E692C6B17B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 683923F8500FBEDC8C4E0CE5 /* ContentView.swift */; };
+		16C4F1D8A4ABACA1A214E5E8 /* FongMiTVApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5CA71A768C47526838FFBFA /* FongMiTVApp.swift */; };
+		3B3B0862815D66EA454E0DAE /* ConfigService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204D362397932DD984A288F4 /* ConfigService.swift */; };
+		52C95E863608B1CBDDD8574B /* Hummingbird in Frameworks */ = {isa = PBXBuildFile; productRef = EEC787FC1DA1277B0EE8E14E /* Hummingbird */; };
+		5E956A91A60F689DE69E5215 /* SpiderSourceLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFB706EB7978A646B8D78BC7 /* SpiderSourceLoader.swift */; };
+		B5F174B2188705F5CBAE1809 /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDFFD6CDA3CE0A8CCE19775 /* AppSettings.swift */; };
+		C61133BCB0090DFDD27C019A /* MacCMSClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0503C4EAB8EA122A561D04A4 /* MacCMSClient.swift */; };
+		E653C1727E75C76A838FCA0A /* SiteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13640BC0A09814E2AB7300F3 /* SiteService.swift */; };
+		E9AEA0C243902072F3E5A530 /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC00A0518667C26A26C36831 /* PlayerView.swift */; };
+		F24646C053A7DC3A0A4B20D8 /* PlaybackState.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECEAF68B3DE7C651868780BF /* PlaybackState.swift */; };
+		F58C0CE4F026CE187D455DF0 /* Spider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C979840BD755E12210CAC6E /* Spider.swift */; };
+		F7B4834A9F3C2D183ED248E1 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC285FB53C5361791EE180FF /* Config.swift */; };
+		FF79C164F05AACD700918742 /* HTTPServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38B1391860B795CBA0445F51 /* HTTPServer.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		0503C4EAB8EA122A561D04A4 /* MacCMSClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacCMSClient.swift; sourceTree = "<group>"; };
+		13640BC0A09814E2AB7300F3 /* SiteService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SiteService.swift; sourceTree = "<group>"; };
+		204D362397932DD984A288F4 /* ConfigService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigService.swift; sourceTree = "<group>"; };
+		38B1391860B795CBA0445F51 /* HTTPServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPServer.swift; sourceTree = "<group>"; };
+		683923F8500FBEDC8C4E0CE5 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		9C979840BD755E12210CAC6E /* Spider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spider.swift; sourceTree = "<group>"; };
+		BC00A0518667C26A26C36831 /* PlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
+		C5CA71A768C47526838FFBFA /* FongMiTVApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FongMiTVApp.swift; sourceTree = "<group>"; };
+		DD6A8CEB49ED16F2F4CBCE1E /* FongMiTV.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FongMiTV.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		DFB706EB7978A646B8D78BC7 /* SpiderSourceLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpiderSourceLoader.swift; sourceTree = "<group>"; };
+		EBDFFD6CDA3CE0A8CCE19775 /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
+		EC285FB53C5361791EE180FF /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
+		ECEAF68B3DE7C651868780BF /* PlaybackState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaybackState.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		DE95750C6725FAC18DEDAEFF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				52C95E863608B1CBDDD8574B /* Hummingbird in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		29522058786CA6C1B39670D2 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				EC285FB53C5361791EE180FF /* Config.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		366BCECFA4FD8A759EC8C63D /* Server */ = {
+			isa = PBXGroup;
+			children = (
+				38B1391860B795CBA0445F51 /* HTTPServer.swift */,
+				ECEAF68B3DE7C651868780BF /* PlaybackState.swift */,
+			);
+			path = Server;
+			sourceTree = "<group>";
+		};
+		7FEEE5F620A2D9F0F4003FD4 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				683923F8500FBEDC8C4E0CE5 /* ContentView.swift */,
+				BC00A0518667C26A26C36831 /* PlayerView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		8C16B084BCD1FD03D1050BFA /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				EBDFFD6CDA3CE0A8CCE19775 /* AppSettings.swift */,
+				204D362397932DD984A288F4 /* ConfigService.swift */,
+				0503C4EAB8EA122A561D04A4 /* MacCMSClient.swift */,
+				13640BC0A09814E2AB7300F3 /* SiteService.swift */,
+				DFB706EB7978A646B8D78BC7 /* SpiderSourceLoader.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		91BDF3F18759165AF91BF69B /* App */ = {
+			isa = PBXGroup;
+			children = (
+				C5CA71A768C47526838FFBFA /* FongMiTVApp.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		A3B5F56995A1DE0983861F56 /* Spider */ = {
+			isa = PBXGroup;
+			children = (
+				9C979840BD755E12210CAC6E /* Spider.swift */,
+			);
+			path = Spider;
+			sourceTree = "<group>";
+		};
+		B5F879BD33C3F3EACC97F556 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				91BDF3F18759165AF91BF69B /* App */,
+				29522058786CA6C1B39670D2 /* Models */,
+				366BCECFA4FD8A759EC8C63D /* Server */,
+				8C16B084BCD1FD03D1050BFA /* Services */,
+				A3B5F56995A1DE0983861F56 /* Spider */,
+				7FEEE5F620A2D9F0F4003FD4 /* Views */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		C9AC64FA9D86AAF1B7D8D7DB = {
+			isa = PBXGroup;
+			children = (
+				B5F879BD33C3F3EACC97F556 /* Sources */,
+				D33FFA5974018090882C42DA /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		D33FFA5974018090882C42DA /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				DD6A8CEB49ED16F2F4CBCE1E /* FongMiTV.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		1D119338A5C866C4AA136B3A /* FongMiTV */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 94D579A8A472728CD0E948D8 /* Build configuration list for PBXNativeTarget "FongMiTV" */;
+			buildPhases = (
+				2CD325F508505AAD774705BA /* Sources */,
+				DE95750C6725FAC18DEDAEFF /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = FongMiTV;
+			packageProductDependencies = (
+				EEC787FC1DA1277B0EE8E14E /* Hummingbird */,
+			);
+			productName = FongMiTV;
+			productReference = DD6A8CEB49ED16F2F4CBCE1E /* FongMiTV.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		509232A09FBB6F6E81798AFB /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1600;
+				TargetAttributes = {
+				};
+			};
+			buildConfigurationList = 8FD0D6763FB64C86311A0AC1 /* Build configuration list for PBXProject "FongMiTV" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = C9AC64FA9D86AAF1B7D8D7DB;
+			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				DB9631536CB122989333CCEA /* XCRemoteSwiftPackageReference "hummingbird" */,
+			);
+			preferredProjectObjectVersion = 77;
+			productRefGroup = D33FFA5974018090882C42DA /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				1D119338A5C866C4AA136B3A /* FongMiTV */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		2CD325F508505AAD774705BA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B5F174B2188705F5CBAE1809 /* AppSettings.swift in Sources */,
+				F7B4834A9F3C2D183ED248E1 /* Config.swift in Sources */,
+				3B3B0862815D66EA454E0DAE /* ConfigService.swift in Sources */,
+				10F742D387CDE3E692C6B17B /* ContentView.swift in Sources */,
+				16C4F1D8A4ABACA1A214E5E8 /* FongMiTVApp.swift in Sources */,
+				FF79C164F05AACD700918742 /* HTTPServer.swift in Sources */,
+				C61133BCB0090DFDD27C019A /* MacCMSClient.swift in Sources */,
+				F24646C053A7DC3A0A4B20D8 /* PlaybackState.swift in Sources */,
+				E9AEA0C243902072F3E5A530 /* PlayerView.swift in Sources */,
+				E653C1727E75C76A838FCA0A /* SiteService.swift in Sources */,
+				F58C0CE4F026CE187D455DF0 /* Spider.swift in Sources */,
+				5E956A91A60F689DE69E5215 /* SpiderSourceLoader.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		359033D47F3486B1BE4FBB00 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		49A8BD92099EAC899B2A44B7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = Resources/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.fongmi.FongMiTV;
+				PRODUCT_NAME = FongMiTV;
+				SDKROOT = macosx;
+				SWIFT_VERSION = 6.0;
+			};
+			name = Debug;
+		};
+		9C0958C7CB184F4771C81F6D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = Resources/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.fongmi.FongMiTV;
+				PRODUCT_NAME = FongMiTV;
+				SDKROOT = macosx;
+				SWIFT_VERSION = 6.0;
+			};
+			name = Release;
+		};
+		F994A6A0071BA307C806DBC1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		8FD0D6763FB64C86311A0AC1 /* Build configuration list for PBXProject "FongMiTV" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F994A6A0071BA307C806DBC1 /* Debug */,
+				359033D47F3486B1BE4FBB00 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		94D579A8A472728CD0E948D8 /* Build configuration list for PBXNativeTarget "FongMiTV" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				49A8BD92099EAC899B2A44B7 /* Debug */,
+				9C0958C7CB184F4771C81F6D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		DB9631536CB122989333CCEA /* XCRemoteSwiftPackageReference "hummingbird" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/hummingbird-project/hummingbird";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		EEC787FC1DA1277B0EE8E14E /* Hummingbird */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DB9631536CB122989333CCEA /* XCRemoteSwiftPackageReference "hummingbird" */;
+			productName = Hummingbird;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 509232A09FBB6F6E81798AFB /* Project object */;
+}
