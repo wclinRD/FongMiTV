@@ -205,16 +205,13 @@ struct SiteDetailView: View {
                 if (totalCount == 0 || vods.count < totalCount) && !vods.isEmpty {
                     HStack {
                         Spacer()
-                        Button {
-                            Task { await loadMore() }
-                        } label: {
-                            if isLoadingMore { ProgressView().scaleEffect(0.7) } else { Text("載入更多") }
-                        }
-                        .buttonStyle(.bordered)
-                        .disabled(isLoadingMore)
+                        if isLoadingMore { ProgressView().scaleEffect(0.7) }
                         Spacer()
                     }
                     .padding(.bottom)
+                    .onAppear {
+                        Task { await loadMore() }
+                    }
                 }
             }
         }
@@ -277,14 +274,22 @@ struct SiteDetailView: View {
         do {
             if let sc = selectedClass {
                 let (list, total) = try await appState.siteService.category(site: site, jsSource: jsSource, type: sc.id, page: currentPage + 1)
-                vods.append(contentsOf: list)
-                currentPage += 1
-                totalCount = total
+                if list.isEmpty {
+                    totalCount = vods.count
+                } else {
+                    vods.append(contentsOf: list)
+                    currentPage += 1
+                    totalCount = (total > 0) ? total : vods.count
+                }
             } else {
                 let (list, total) = try await appState.siteService.category(site: site, jsSource: jsSource, type: "0", page: currentPage + 1)
-                vods.append(contentsOf: list)
-                currentPage += 1
-                totalCount = total
+                if list.isEmpty {
+                    totalCount = vods.count
+                } else {
+                    vods.append(contentsOf: list)
+                    currentPage += 1
+                    totalCount = (total > 0) ? total : vods.count
+                }
             }
         } catch {
             self.error = error.localizedDescription
