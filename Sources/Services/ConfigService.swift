@@ -15,6 +15,42 @@ final class ConfigService: ObservableObject {
             return
         }
         let ext = url.pathExtension.lowercased()
+        // Support loading a MacCMS provider URL directly (e.g. .../api.php/provide/vod)
+        if ext != "json" && ext != "py" && ext != "js" {
+            do {
+                let (data, _) = try await URLSession.shared.data(from: url)
+                // Try MacCMS response
+                if let resp = try? JSONDecoder().decode(MacCMSResponse.self, from: data), (resp.list != nil || resp.classList != nil) {
+                    var cfg = AppConfig()
+                    cfg.name = url.host ?? "MacCMS"
+                    var site = Site(key: "direct_mac", name: url.host ?? "MacCMS")
+                    site.type = 1
+                    site.api = urlString
+                    site.searchable = 1
+                    site.quickSearch = 1
+                    site.filterable = 1
+                    site.changeable = 1
+                    cfg.sites = [site]
+                    self.config = cfg
+                    return
+                }
+                // Generic JSON with list key
+                if let obj = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
+                   obj["list"] != nil {
+                    var cfg = AppConfig()
+                    cfg.name = url.host ?? "Source"
+                    var site = Site(key: "direct_src", name: url.host ?? "Source")
+                    site.type = 1
+                    site.api = urlString
+                    site.searchable = 1
+                    cfg.sites = [site]
+                    self.config = cfg
+                    return
+                }
+            } catch {
+                // fall through to normal handling
+            }
+        }
         // Support loading a Python/JS spider directly as a single-site config
         if ext == "py" || ext == "js" {
             var cfg = AppConfig()
