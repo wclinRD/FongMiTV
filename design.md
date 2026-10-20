@@ -39,10 +39,11 @@ P1:
 - 遠端控制 / 推送 / 同步
 
 P2:
-- DLNA 投放/接收
-- Python Spider / JAR 載入
-- 爬蟲測試頁
-- 模組管理（mpv/Thunder）
+- ✅ DLNA 投放/接收（SSDP 搜尋 + AVTransport 投放）
+- ✅ Python Spider 載入（Simple + FongMi 相容）
+- ⬜ Java JAR spider（macOS 無 Java Runtime，以 JS/Python 替代）
+- ⬜ 爬蟲測試頁
+- ⬜ 模組管理（mpv/Thunder）
 
 ## 5. 資料模型
 - `AppConfig`, `Site`, `Style`, `ParseRule`, `LiveConfig`, `Doh`, `ProxyRule`, `Rule`, `HeaderRule`
@@ -63,11 +64,14 @@ protocol Spider {
 ## 7. 實作順序
 1. ✅ 專案骨架 + 編譯
 2. ✅ 基礎模型 + ConfigService + SiteService + JSSpider + HTTP Server + UI
-3. ✅ MacCMS 直連站點瀏覽（分類、列表、搜尋、詳情）；Spider JS 來源載入仍待
-4. ✅ 播放流程（AVPlayer，倍速/字幕待加強）
-5. ⬜ 本地 HTTP 伺服器完整路由
-6. ⬜ 直播 + EPG
-7. ⬜ DLNA / Python / JAR
+3. ✅ MacCMS 直連站點瀏覽（分類、列表、搜尋、詳情）；Spider JS 來源載入（SpiderSourceLoader）
+4. ✅ 播放流程（AVPlayer、倍速、外部字幕 overlay、PiP）
+5. ✅ 本地 HTTP 伺服器完整路由（/action /file /media /proxy /cache /parse /image）
+6. ✅ 直播 + EPG（M3U/TXT/JSON + XMLTV）
+7. ✅ DLNA 裝置搜尋與投放（SSDP + AVTransport SOAP）
+8. ✅ Python spider（Simple + FongMi 相容，Ncat.py 可播）
+9. ⬜ MoonTV 風格 JS spider（Fastify/ES module）— 需 Node 執行環境
+10. ⬜ Java JAR spider — macOS 無 Java Runtime，以 JS/Python 替代
 
 ## 8. 風險
 - `lib-*.aar` 為 Android 專有，macOS 端以 AVPlayer/mpv 替代。
