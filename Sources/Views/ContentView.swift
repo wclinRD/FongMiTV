@@ -41,6 +41,17 @@ struct ContentView: View {
                     Label("載入配置", systemImage: "doc.badge.plus")
                 }
             }
+            ToolbarItem(placement: .automatic) {
+                Button {
+                    appState.config = nil
+                    appState.sites = []
+                    appState.selectedSite = nil
+                    appState.errorMessage = nil
+                } label: {
+                    Label("清除配置", systemImage: "trash")
+                }
+                .help("清除已載入的配置")
+            }
         }
         .sheet(isPresented: $showConfigSheet) {
             ConfigLoadSheet(configURL: $configURL) { url in
@@ -353,16 +364,44 @@ struct ConfigLoadSheet: View {
     @Binding var configURL: String
     var onLoad: (String) -> Void
     @Environment(\.dismiss) private var dismiss
+    @State private var history: [String] = ConfigURLHistory.list()
 
     var body: some View {
         VStack(spacing: 16) {
             Text("載入配置".traditionalized()).font(.headline)
             TextField("配置 URL", text: $configURL)
                 .textFieldStyle(.roundedBorder)
+            if !history.isEmpty {
+                VStack(alignment: .leading, spacing: 4) {
+                    HStack {
+                        Text("過去載入的 URL").font(.caption).foregroundStyle(.secondary)
+                        Spacer()
+                        Button("清除歷史") {
+                            ConfigURLHistory.clear()
+                            history = []
+                        }
+                        .font(.caption)
+                    }
+                    ScrollView {
+                        VStack(alignment: .leading, spacing: 2) {
+                            ForEach(history, id: \.self) { url in
+                                Button {
+                                    configURL = url
+                                } label: {
+                                    Text(url).font(.caption).lineLimit(1).truncationMode(.middle)
+                                }
+                                .buttonStyle(.plain)
+                            }
+                        }
+                    }
+                    .frame(maxHeight: 120)
+                }
+            }
             HStack {
                 Button("取消") { dismiss() }
                 Spacer()
                 Button("載入") {
+                    ConfigURLHistory.add(configURL)
                     onLoad(configURL)
                     dismiss()
                 }
@@ -371,6 +410,6 @@ struct ConfigLoadSheet: View {
             }
         }
         .padding()
-        .frame(width: 400)
+        .frame(width: 420)
     }
 }
