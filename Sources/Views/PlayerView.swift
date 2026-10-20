@@ -12,8 +12,12 @@ struct PlayerView: View {
 
     var body: some View {
         VStack(spacing: 0) {
-            VideoPlayer(player: player)
-                .frame(minHeight: 300)
+            if let player {
+                PiPPlayerView(player: player)
+                    .frame(minHeight: 300)
+            } else {
+                Rectangle().fill(.black).frame(minHeight: 300)
+            }
             HStack(spacing: 12) {
                 ForEach(speeds, id: \.self) { s in
                     Button(String(format: "%.2gx", s).replacingOccurrences(of: ".00x", with: "x")) {

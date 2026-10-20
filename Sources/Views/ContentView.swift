@@ -1,10 +1,12 @@
 import SwiftUI
 
 enum AppSelection: Hashable {
+    case dlna
     static func == (lhs: AppSelection, rhs: AppSelection) -> Bool {
         switch (lhs, rhs) {
         case (.site(let a), .site(let b)): return a == b
         case (.live(let a), .live(let b)): return a == b
+        case (.dlna, .dlna): return true
         default: return false
         }
     }
@@ -12,6 +14,7 @@ enum AppSelection: Hashable {
         switch self {
         case .site(let s): hasher.combine(0); hasher.combine(s)
         case .live(let l): hasher.combine(1); hasher.combine(l)
+        case .dlna: hasher.combine(2)
         }
     }
     case site(Site)
@@ -74,6 +77,11 @@ struct SidebarView: View {
                     }
                 }
             }
+            Section("工具") {
+                NavigationLink(value: AppSelection.dlna) {
+                    Label("DLNA 投放", systemImage: "dot.radiowaves.left.and.right")
+                }
+            }
         }
         .listStyle(.sidebar)
         .navigationTitle("FongMiTV")
@@ -90,6 +98,8 @@ struct DetailView: View {
             SiteDetailView(site: site)
         case .live(let live):
             LiveView(liveConfig: live)
+        case .dlna:
+            DLNAView()
         case nil:
             if let config = appState.config {
                 ConfigOverview(config: config)
