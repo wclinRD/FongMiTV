@@ -12,6 +12,7 @@ struct PlayerView: View {
     @State private var speed: Double = 1.0
     @State private var cues: [SubtitleCue] = []
     @State private var currentSubtitle: String? = nil
+    @State private var errorMessage: String? = nil
     private let speeds: [Double] = [0.5, 0.75, 1.0, 1.25, 1.5, 2.0]
 
     var body: some View {
@@ -29,6 +30,14 @@ struct PlayerView: View {
                         .padding(6)
                         .background(.black.opacity(0.6), in: RoundedRectangle(cornerRadius: 6))
                         .padding(.bottom, 12)
+                }
+                if let err = errorMessage {
+                    Text(err)
+                        .font(.caption)
+                        .foregroundStyle(.red)
+                        .padding(6)
+                        .background(.black.opacity(0.7), in: RoundedRectangle(cornerRadius: 6))
+                        .padding(.bottom, 40)
                 }
             }
             .frame(minHeight: 300)
@@ -61,6 +70,16 @@ struct PlayerView: View {
             let p = AVPlayer(playerItem: item)
             self.player = p
             PlaybackState.shared.update(url: url.absoluteString, title: title, isPlaying: true, speed: 1.0)
+            // observe errors
+            Task {
+                while self.player != nil {
+                    if let item = p.currentItem, item.status == .failed {
+                        self.errorMessage = item.error?.localizedDescription ?? "播放失敗"
+                        break
+                    }
+                    try? await Task.sleep(nanoseconds: 500_000_000)
+                }
+            }
             p.play()
             let interval = CMTime(seconds: 0.5, preferredTimescale: 600)
             timeObserver = p.addPeriodicTimeObserver(forInterval: interval, queue: .main) { t in

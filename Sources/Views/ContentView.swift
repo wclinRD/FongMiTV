@@ -389,19 +389,23 @@ struct VodDetailSheet: View {
 
 struct VodCard: View {
     let vod: Vod
+    var action: () -> Void = {}
     var body: some View {
-        VStack(alignment: .leading) {
-            AsyncImage(url: URL(string: vod.vodPic ?? "")) { img in
-                img.resizable().scaledToFill()
-            } placeholder: {
-                Rectangle().fill(.quaternary)
+        Button(action: action) {
+            VStack(alignment: .leading) {
+                AsyncImage(url: URL(string: vod.vodPic ?? "")) { img in
+                    img.resizable().scaledToFill()
+                } placeholder: {
+                    Rectangle().fill(.quaternary)
+                }
+                .frame(height: 180)
+                .clipped()
+                .cornerRadius(8)
+                Text((vod.vodName ?? "Unknown").traditionalized()).font(.caption).lineLimit(2)
+                if let r = vod.vodRemarks { Text(r.traditionalized()).font(.caption2).foregroundStyle(.secondary) }
             }
-            .frame(height: 180)
-            .clipped()
-            .cornerRadius(8)
-            Text((vod.vodName ?? "Unknown").traditionalized()).font(.caption).lineLimit(2)
-            if let r = vod.vodRemarks { Text(r.traditionalized()).font(.caption2).foregroundStyle(.secondary) }
         }
+        .buttonStyle(.plain)
     }
 }
 
