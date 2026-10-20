@@ -114,6 +114,16 @@ struct Site: Codable, Identifiable, Hashable {
         case key, name, type, api, searchable, quickSearch, filterable, changeable, ext, jar, playerUrl, playerType, categories, style
     }
 
+    init() {
+        self.key = ""
+        self.name = ""
+    }
+
+    init(key: String, name: String) {
+        self.key = key
+        self.name = name
+    }
+
     init(from decoder: Decoder) throws {
         let c = try decoder.container(keyedBy: CodingKeys.self)
         key = try c.decode(String.self, forKey: .key)

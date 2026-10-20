@@ -14,6 +14,23 @@ final class ConfigService: ObservableObject {
             error = "Invalid URL"
             return
         }
+        let ext = url.pathExtension.lowercased()
+        // Support loading a Python/JS spider directly as a single-site config
+        if ext == "py" || ext == "js" {
+            var cfg = AppConfig()
+            cfg.name = url.lastPathComponent
+            var site = Site(key: "direct_\(ext)", name: url.lastPathComponent)
+            site.type = 3
+            site.api = ""
+            site.ext = urlString
+            site.searchable = 1
+            site.quickSearch = 1
+            site.filterable = 1
+            site.changeable = 1
+            cfg.sites = [site]
+            self.config = cfg
+            return
+        }
         do {
             let (data, resp) = try await URLSession.shared.data(from: url)
             // Detect HTML landing pages / non-JSON responses
