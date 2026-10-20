@@ -16,10 +16,16 @@ final class ConfigService: ObservableObject {
         }
         do {
             let (data, resp) = try await URLSession.shared.data(from: url)
+            // Detect HTML landing pages / non-JSON responses
+            if let text = String(data: data, encoding: .utf8),
+               text.trimmingCharacters(in: .whitespacesAndNewlines).hasPrefix("<") {
+                self.error = "伺服器回傳 HTML 而非 JSON 配置，請確認 URL 正確。"
+                return
+            }
             let decoded = try JSONDecoder().decode(AppConfig.self, from: data)
             self.config = decoded
         } catch {
-            self.error = error.localizedDescription
+            self.error = "無法解析配置：\(error.localizedDescription)"
         }
     }
 
