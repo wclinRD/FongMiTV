@@ -17,6 +17,7 @@
 		5E956A91A60F689DE69E5215 /* SpiderSourceLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFB706EB7978A646B8D78BC7 /* SpiderSourceLoader.swift */; };
 		6F8AEBAA0FA5020248824A53 /* DLNAView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F3CB375E12EF0E3B9FBD2B /* DLNAView.swift */; };
 		8BB7DFB71C4930E5B3B4B5EF /* PiPPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6C2DEC5B772094319BDD710 /* PiPPlayerView.swift */; };
+		9D0F0D0474DB7343E0A48BEF /* FongMiPythonSpider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EDC1FC60814813E1165E408 /* FongMiPythonSpider.swift */; };
 		B4110FD6B511361BAAF72A2E /* SubtitleService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C1673E5EDFC414E80A419C6 /* SubtitleService.swift */; };
 		B5F174B2188705F5CBAE1809 /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBDFFD6CDA3CE0A8CCE19775 /* AppSettings.swift */; };
 		C61133BCB0090DFDD27C019A /* MacCMSClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0503C4EAB8EA122A561D04A4 /* MacCMSClient.swift */; };
@@ -34,6 +35,7 @@
 		13640BC0A09814E2AB7300F3 /* SiteService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SiteService.swift; sourceTree = "<group>"; };
 		204D362397932DD984A288F4 /* ConfigService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigService.swift; sourceTree = "<group>"; };
 		38B1391860B795CBA0445F51 /* HTTPServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPServer.swift; sourceTree = "<group>"; };
+		5EDC1FC60814813E1165E408 /* FongMiPythonSpider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FongMiPythonSpider.swift; sourceTree = "<group>"; };
 		65F3CB375E12EF0E3B9FBD2B /* DLNAView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DLNAView.swift; sourceTree = "<group>"; };
 		683923F8500FBEDC8C4E0CE5 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		8B67BD60635116FC7DF99903 /* LiveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveView.swift; sourceTree = "<group>"; };
@@ -119,6 +121,7 @@
 		A3B5F56995A1DE0983861F56 /* Spider */ = {
 			isa = PBXGroup;
 			children = (
+				5EDC1FC60814813E1165E408 /* FongMiPythonSpider.swift */,
 				D4D55D36CDA2E61C6F3BD27A /* PythonSpider.swift */,
 				9C979840BD755E12210CAC6E /* Spider.swift */,
 			);
@@ -220,6 +223,7 @@
 				10F742D387CDE3E692C6B17B /* ContentView.swift in Sources */,
 				251F1562F09BF6DE8AE6BA72 /* DLNAService.swift in Sources */,
 				6F8AEBAA0FA5020248824A53 /* DLNAView.swift in Sources */,
+				9D0F0D0474DB7343E0A48BEF /* FongMiPythonSpider.swift in Sources */,
 				16C4F1D8A4ABACA1A214E5E8 /* FongMiTVApp.swift in Sources */,
 				FF79C164F05AACD700918742 /* HTTPServer.swift in Sources */,
 				2670B278CA91E71559342EC1 /* LiveService.swift in Sources */,
