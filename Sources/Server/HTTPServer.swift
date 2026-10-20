@@ -32,15 +32,15 @@ final class LocalHTTPServer: ObservableObject {
                 // cache
                 router.get("/cache") { req, _ in
                     let p = req.uri.queryParameters
-                    let action = p.getFirst(name: "do") ?? ""
-                    let rule = p.getFirst(name: "rule") ?? ""
-                    let key = p.getFirst(name: "key") ?? ""
+                    let action = (p.first(where: { String($0.0) == "do" })?.1).map(String.init) ?? ""
+                    let rule = (p.first(where: { String($0.0) == "rule" })?.1).map(String.init) ?? ""
+                    let key = (p.first(where: { String($0.0) == "key" })?.1).map(String.init) ?? ""
                     let fullKey = "cache_" + (rule.isEmpty ? "" : rule + "_") + key
                     if action == "get" {
                         return UserDefaults.standard.string(forKey: fullKey) ?? ""
                     }
                     if action == "set" {
-                        let val = p.getFirst(name: "value") ?? ""
+                        let val = (p.first(where: { String($0.0) == "value" })?.1).map(String.init) ?? ""
                         UserDefaults.standard.set(val, forKey: fullKey)
                     }
                     if action == "del" {
@@ -51,16 +51,17 @@ final class LocalHTTPServer: ObservableObject {
                 // action
                 router.get("/action") { req, _ in
                     let p = req.uri.queryParameters
-                    let doParam = p.getFirst(name: "do") ?? ""
+                    let doParam = (p.first(where: { String($0.0) == "do" })?.1).map(String.init) ?? ""
+                    let dict = Dictionary(uniqueKeysWithValues: p.map { (String($0.0), String($0.1)) })
                     await MainActor.run {
-                        Self.handleAction(doParam, params: p, root: root)
+                        Self.handleAction(doParam, params: dict, root: root)
                     }
                     return "ok"
                 }
                 // file listing / serving
                 router.get("/file") { req, _ in
                     let p = req.uri.queryParameters
-                    let path = p.getFirst(name: "path") ?? ""
+                    let path = (p.first(where: { String($0.0) == "path" })?.1).map(String.init) ?? ""
                     return Self.serveFile(path: path, root: root, req: req)
                 }
                 router.get("/file/*") { req, _ in
@@ -70,8 +71,8 @@ final class LocalHTTPServer: ObservableObject {
                 // newFolder
                 router.get("/newFolder") { req, _ in
                     let p = req.uri.queryParameters
-                    let path = p.getFirst(name: "path") ?? ""
-                    let name = p.getFirst(name: "name") ?? ""
+                    let path = (p.first(where: { String($0.0) == "path" })?.1).map(String.init) ?? ""
+                    let name = (p.first(where: { String($0.0) == "name" })?.1).map(String.init) ?? ""
                     let dir = root.appendingPathComponent(path, isDirectory: true)
                     let target = dir.appendingPathComponent(name, isDirectory: true)
                     try? FileManager.default.createDirectory(at: target, withIntermediateDirectories: true)
@@ -87,8 +88,8 @@ final class LocalHTTPServer: ObservableObject {
                 // parse
                 router.get("/parse") { req, _ in
                     let p = req.uri.queryParameters
-                    let jxs = p.getFirst(name: "jxs") ?? ""
-                    let url = p.getFirst(name: "url") ?? ""
+                    let jxs = (p.first(where: { String($0.0) == "jxs" })?.1).map(String.init) ?? ""
+                    let url = (p.first(where: { String($0.0) == "url" })?.1).map(String.init) ?? ""
                     let html = "<html><body><script>console.log('parse', '\(jxs)', '\(url)')</script></body></html>"
                     return Response(status: .ok, headers: [.contentType: "text/html"], body: .init(byteBuffer: .init(string: html)))
                 }
@@ -105,7 +106,8 @@ final class LocalHTTPServer: ObservableObject {
                 // proxy
                 router.get("/proxy") { req, _ in
                     let p = req.uri.queryParameters
-                    guard let target = p.getFirst(name: "url") ?? p.getFirst(name: "do") else {
+                    guard let target = (p.first(where: { String($0.0) == "url" })?.1).map(String.init)
+                        ?? (p.first(where: { String($0.0) == "do" })?.1).map(String.init) else {
                         return Response(status: .badRequest)
                     }
                     // If target is a URL, fetch it
@@ -136,24 +138,24 @@ final class LocalHTTPServer: ObservableObject {
     }
 
     // MARK: - Action handling
-    nonisolated static func handleAction(_ action: String, params: URI.QueryParameters, root: URL) {
+    nonisolated static func handleAction(_ action: String, params: [String: String], root: URL) {
         Task { @MainActor in
             switch action {
             case "push":
-                if let url = params.getFirst(name: "url"), !url.isEmpty {
+                if let url = params["url"], !url.isEmpty {
                     // notify app to push url to player
                     NotificationCenter.default.post(name: .init("FongPushURL"), object: url)
                 }
             case "search":
-                if let word = params.getFirst(name: "word"), !word.isEmpty {
+                if let word = params["word"], !word.isEmpty {
                     NotificationCenter.default.post(name: .init("FongSearch"), object: word)
                 }
             case "setting":
-                if let text = params.getFirst(name: "text"), !text.isEmpty {
-                    NotificationCenter.default.post(name: .init("FongSetting"), object: (text, params.getFirst(name: "name")))
+                if let text = params["text"], !text.isEmpty {
+                    NotificationCenter.default.post(name: .init("FongSetting"), object: (text, params["name"]))
                 }
             case "control":
-                if let type = params.getFirst(name: "type") {
+                if let type = params["type"] {
                     switch type {
                     case "play": PlaybackState.shared.update(isPlaying: true)
                     case "pause": PlaybackState.shared.update(isPlaying: false)
@@ -161,7 +163,7 @@ final class LocalHTTPServer: ObservableObject {
                     }
                 }
             case "danmaku":
-                if let text = params.getFirst(name: "text"), !text.isEmpty {
+                if let text = params["text"], !text.isEmpty {
                     NotificationCenter.default.post(name: .init("FongDanmaku"), object: text)
                 }
             default: break
@@ -210,7 +212,7 @@ final class LocalHTTPServer: ObservableObject {
 
     nonisolated static func deletePath(req: Request, root: URL) -> Response {
         let p = req.uri.queryParameters
-        let path = p.getFirst(name: "path") ?? ""
+        let path = (p.first(where: { String($0.0) == "path" })?.1).map(String.init) ?? ""
         let target = root.appendingPathComponent(path.trimmingCharacters(in: CharacterSet(charactersIn: "/")))
         try? FileManager.default.removeItem(at: target)
         return Response(status: .ok, body: .init(byteBuffer: .init(string: "ok")))
@@ -234,12 +236,3 @@ final class LocalHTTPServer: ObservableObject {
     }
 }
 
-extension URI.QueryParameters {
-    func getFirst(name: String) -> String? {
-        // Hummingbird's queryParameters is a collection of (name,value)
-        for (n, v) in self {
-            if n == name { return v }
-        }
-        return nil
-    }
-}

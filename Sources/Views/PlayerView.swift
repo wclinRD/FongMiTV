@@ -20,9 +20,9 @@ struct PlayerView: View {
                 timeObserver = p.addPeriodicTimeObserver(forInterval: interval, queue: .main) { t in
                     Task { @MainActor in
                         PlaybackState.shared.update(
-                            position: CMTimeGetSeconds(t),
+                            isPlaying: p.rate > 0,
                             duration: p.currentItem.map { CMTimeGetSeconds($0.duration) } ?? 0,
-                            isPlaying: p.rate > 0
+                            position: CMTimeGetSeconds(t)
                         )
                     }
                 }
